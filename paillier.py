@@ -44,7 +44,7 @@ def PailEnc(m, n, g):
     n2 = n * n
     while flag != True:
         r = random.randint(1, n2 - 1) 
-        if r % n == 0 or r % 2 != 0:
+        if r % 2 != 0:
             continue
         else:
             flag = True
