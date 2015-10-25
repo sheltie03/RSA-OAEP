@@ -6,13 +6,13 @@ Uploaded mainly python scripts of public key cryptosystem...
 - 2ed func: [WRONG RSA Decoding algorithm] 3 variables(c: cipher text, d: secret key, n: public key) -> message
 - 3rd func: hexadecimal -> CharacterCode (for example: 33 -> 3 and so on...)
 - 4th func: it changes an integer array to a character string.
-- 5th func: Refer to RSA specification or my document _OAEP.pdf_ for MGF(masked generation function). 
-- 6th func: Refer to RSA specification or _OAEP.pdf_ for RSA-OAEP Encoding function.
-- 7th func: Refer to RSA specification or _OAEP.pdf_ for RSA-OAEP Decoding function.
+- 5th func: Refer to RSA specification or my document __OAEP.pdf__ for MGF(masked generation function). 
+- 6th func: Refer to RSA specification or __OAEP.pdf__ for RSA-OAEP Encoding function.
+- 7th func: Refer to RSA specification or __OAEP.pdf__ for RSA-OAEP Decoding function.
 - remark: I guess input r of RSA-OAEPDec is wrong, but it is for understanding RSA-OAEP. I think input is not r but hLen.
 
 ## paillier.py:
-- remark: Refer to my document _paillier.pdf_ which is written in Japanese, but if only you trace a stream of equations in document, you can understand paillier's theory.
+- remark: Refer to my document __paillier.pdf__ which is written in Japanese, but if only you trace a stream of equations in document, you can understand paillier's theory.
 - 1st func: LCM is the least common multiple.
 - 2ed func: The key generation of Paillier Public Key Cryptosystem
 - 3rd func: [Paillier Encoding algorithm] r is a random integer except multiples of p or q.
