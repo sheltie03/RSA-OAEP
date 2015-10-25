@@ -10,6 +10,7 @@ Uploaded mainly python scripts of public key cryptosystem...
 - 6th func: Refer to RSA specification or my OAEP.pdf for RSA-OAEP Encoding function.
 - 7th func: Refer to RSA specification or my OAEP.pdf for RSA-OAEP Decoding function.
 - remark: I guess input r of RSA-OAEPDec is wrong, but it is for understanding RSA-OAEP. I think input is not r but hLen.
+
 ## paillier.py:
 - remark: Refer to my document paillier.pdf which is written in Japanese, but if only you trace a stream of equations in document, you can understand paillier's theory.
 - 1st func: LCM is the least common multiple.
