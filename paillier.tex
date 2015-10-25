@@ -1,0 +1,99 @@
+\documentclass[a4paper]{jsarticle}
+\pagestyle{empty} 
+\usepackage{amssymb} 
+\usepackage{otf} 
+\usepackage{bm} 
+\usepackage{amsmath} 
+\newtheorem{Thm}{定理}%[section]
+\newtheorem{Def}{定義}%[section]
+\newtheorem{Lem}{補題}%[section]
+\newtheorem{Rem}{注意}%[section]
+\begin{document}
+\begin{center}
+\LARGE \textbf{\underline{Paillier暗号}}
+\end{center}
+\begin{enumerate}
+\item[\textbf{(1)}] \textbf{準備}\\
+Paillier暗号は，次のような性質を利用している．$n \in \mathbb{N}^+$のとき，二項定理より，
+\begin{align*}
+(1 + x)^n = \sum^{n}_{j = 0}{}_n\mathrm{C}_{j}x^j\equiv 1 + nx.\ \ \  (\mathrm{mod}\  n^2)\tag*{(1)}
+\end{align*}
+そこで，$y := (1 + x)^n $とすると，$x = (y - 1)/n\ (\mathrm{mod}\  n^2)$である．ここで，関数$L(x)$を次のように定義する．
+\begin{align*}
+\label{funcL}
+L(x) := \dfrac{x - 1}{n}.\tag*{(2)}
+\end{align*}
+この関数は，後でPaillier暗号の復号の際に使う．
+\begin{align*}
+L(y\ (\mathrm{mod}\  n^2)) =\dfrac{y\ (\mathrm{mod}\  n^2) - 1}{n}\ \ \ (\mathrm{mod}\  n)\equiv\dfrac{(1 + nx)- 1}{n}=x.\tag*{(3)}
+\end{align*}
+
+\item[\textbf{(2)}]\textbf{鍵生成}
+\begin{itemize}
+\item $\gcd(pq,(p-1)(q-1)) = 1$を満たす大きな素数$p,q$を選ぶ．
+\item 公開鍵$\bm{pk}$は，$n\leftarrow pq, \ g\leftarrow (1+\alpha n)\beta^n$である．ただし，$\forall\alpha,\forall\beta\in\mathbb{Z}^{*}_{n^2}$である．
+\item 秘密鍵$\bm{sk}$は，$\lambda\leftarrow \mathrm{lcm}(p-1, q-1)$である．
+\end{itemize}
+
+
+
+
+\item[\textbf{(3)}]\textbf{暗号化アルゴリズム}\\
+公開鍵$\bm{pk}$と$\gcd(r,n) = 1$を満たす乱数$r\in\mathbb{Z}^{*}_{n^2}$を用いて，次のようにメッセージ$m\in\mathbb{Z}_{n}$を暗号化する．つまり，$c$を暗号文，$E$を暗号化関数とすると，
+\begin{align*}
+c=E(m,r):=g^mr^n.\ \ \ (\mathrm{mod}\  n^2)\tag*{(4)}
+\end{align*}
+
+
+
+\item[\textbf{(4)}]\textbf{復号化アルゴリズム}\\
+秘密鍵$\bm{sk}$と\ref{funcL}の関数$L$を用いて復号する．
+\begin{align*}
+\label{decp}
+\dfrac{L(c^\lambda\ (\mathrm{mod}\  n^2))}{L(g^\lambda\ (\mathrm{mod}\  n^2))}  = m.\ \ \ (\mathrm{mod}\  n)\tag*{(5)}
+\end{align*}
+\ref{decp}を計算するために，まず$r^{\lambda n} \equiv 1 \ (\mathrm{mod}\  n^2)$を示す必要がある．
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\Lem \label{Thm1}$\gcd(r,n) = 1$を満たす$r\in\mathbb{Z}^{*}_{n^2}$について$r^{\lambda n} \equiv 1 \ (\mathrm{mod}\  n^2)$が成り立つ．\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\textit{proof.\ }Eulerの整関数より$\varphi(n^2) = n(p-1)(q-1)$であり，$\gcd(pq,(p-1)(q-1)) = 1$なので，原始根定理より$\mathbb{Z}^{*}_{n^2}$には，位数$n$と位数$(p-1)(q-1)$の部分群が存在する．したがって，$\gcd(r,n) = 1$を満たす$r\in\mathbb{Z}^{*}_{n^2}$について， Eulerの定理の精密化\footnote{Refined Euler's Theorem}より，
+\begin{align*}
+r^\lambda\equiv 1.\ \ \ (\mathrm{mod}\  n)\tag*{(6)}
+\end{align*}
+つまり，ある整数$Q$を用いて$r^\lambda:=1 + nQ$と表すことができる．よって，
+\begin{align*}
+r^{\lambda n} = (1 + nQ)^n = 1 + n^2 (Q +\cdots) \equiv 1.\ \ \ (\mathrm{mod}\  n^2)\tag*{(7)}
+\end{align*}
+以上より，補題\ref{Thm1}は示された．$\blacksquare$
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+補題\ref{Thm1}を用いて，$L(c^\lambda\ (\mathrm{mod}\  n^2))$を具体的に計算すると，$\gcd(\alpha, n) = 1, \gcd(\beta, n) = 1$なので，
+\begin{align*}
+\label{LC}
+L(c^\lambda\ (\mathrm{mod}\  n^2)) &= L(g^{m\lambda}\cdot r^{\lambda n}\ (\mathrm{mod}\  n^2))=L(g^{m\lambda}\ (\mathrm{mod}\  n^2))&\\
+&= \dfrac{(1+\alpha n)^{m\lambda}\beta^{nm\lambda}\ (\mathrm{mod}\  n^2)-1}{n}&\\
+&\equiv\dfrac{(1 + \alpha nm\lambda)-1}{n}=\alpha m\lambda.\ (\mathrm{mod}\  n)\tag*{(8)}&
+\end{align*}
+以上\ref{decp},\ref{LC}より，
+\begin{align*}
+\dfrac{L(c^\lambda\ (\mathrm{mod}\  n^2))}{L(g^\lambda\ (\mathrm{mod}\  n^2))} = \alpha m\lambda\cdot(\alpha\lambda)^{-1} = m.\ (\mathrm{mod}\  n)\tag*{(9)}
+\end{align*}
+
+\item[\textbf{(5)}]\textbf{暗号化関数の準同型性}\\
+Paillier暗号化関数$E$は準同型写像である．乱数$r_1, r_2\in\mathbb{Z}^{*}_n$とメッセージ$m_1, m_2\in\mathbb{Z}_{n}$を暗号化した暗号文$E(m_1,r_1),E(m_2,r_2)$の積を考える．
+\begin{align*}
+\label{kahou1}
+E(m_1,r_1)\times E(m_2,r_2)&=g^{m_1}r_1^n\times g^{m_2}r_2^n\\
+&=g^{m_1+m_2}(r_1r_2)^n&\\
+&=E(m_1+m_2, r_1r_2).\ \ \ (\mathrm{mod}\  n^2)&\tag*{(10)}
+\end{align*}
+したがって，メッセージ$m\in\mathbb{Z}_{n}$のスカラー倍は次のように表すことができる．$N\in\mathbb{Z}_n$において，
+\begin{align*}
+\label{kahou2}
+\prod_{i = 1}^{N}E(m,r_i)&=E(m,r_1)\times E(m,r_2)\times \cdots \times E(m,r_N)&\\ 
+&=(g^{m})^N\times \prod_{i=1}^{N} r_i=E(N\times m, r_1r_2\cdots r_N).\ \ (\mathrm{mod}\  n^2)&\tag*{(11)}
+\end{align*}
+\ref{kahou1},\ref{kahou2}のように暗号化したまま平文の和やスカラー倍を求められる性質を\textbf{加法準同型性}と呼ぶ．
+\end{enumerate}
+\end{document}
