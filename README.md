@@ -12,7 +12,7 @@ Uploaded mainly python scripts of public key cryptosystem...
 - remark: I guess input r of RSA-OAEPDec is wrong, but it is for understanding RSA-OAEP. I think input is not r but hLen.
 
 ## paillier.py:
-- remark: Refer to my document __paillier.tex__ which is written in __jsarticle__, but if only you trace a stream of equations, you can understand paillier's theory.
+- remark: Refer to my document __paillier.tex__ which is written in Japanese(__jsarticle__), but if only you trace a stream of equations, you can understand paillier's theory.
 - 1st func: LCM is the least common multiple.
 - 2ed func: The key generation of Paillier Public Key Cryptosystem
 - 3rd func: [Paillier Encoding algorithm] r is a random integer except multiples of p or q.
