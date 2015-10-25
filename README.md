@@ -9,4 +9,4 @@ Uploaded mainly python scripts of public key cryptosystem...
 - 5th func: Refer to RSA specification or my OAEP.pdf for MGF(masked generation function). 
 - 6th func: Refer to RSA specification or my OAEP.pdf for RSA-OAEP Encoding function.
 - 7th func: Refer to RSA specification or my OAEP.pdf for RSA-OAEP Decoding function.
-- remark:) I guess input r of RSA-OAEPDec is wrong, but it is for understanding RSA-OAEP.
+- remark:) I guess input r of RSA-OAEPDec is wrong, but it is for understanding RSA-OAEP. I think input is not r but hLen.
